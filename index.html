@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0d0f1a" />
+    <title>Solomon (SOL) — Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Solomon, a full-stack developer and final-year Software Engineering student at Mekelle University, building reliable web applications with React, TypeScript, Spring Boot and Node.js."
+    />
+    <meta name="author" content="Solomon" />
+    <!-- Link previews. og:url, og:image and the canonical link are added at build time (see vite.config.ts). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SOL — Solomon's portfolio" />
+    <meta property="og:title" content="Solomon (SOL) — Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Final-year Software Engineering student building reliable web apps with React, TypeScript, Spring Boot and Node.js. Projects, experience and contact."
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Solomon, Full-Stack Developer, shown beside a portrait on a navy background" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Solomon (SOL) — Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Final-year Software Engineering student building reliable web apps with React, TypeScript, Spring Boot and Node.js."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- Fonts are self-hosted (see src/index.css); preload the one every visitor needs first. -->
+    <link rel="preload" href="/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      // Dark is the default; apply a saved "light" choice before first paint so nothing flashes.
+      var light = false;
+      try {
+        light = localStorage.getItem('theme') === 'light';
+      } catch (e) {}
+      if (!light) document.documentElement.classList.add('dark');
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>This portfolio needs JavaScript enabled to display.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

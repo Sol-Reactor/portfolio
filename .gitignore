@@ -1,0 +1,17 @@
+# Dependencies and build output
+node_modules
+dist
+tsconfig.tsbuildinfo
+
+# Local environment (see .env.example)
+.env
+.env.local
+.env.*.local
+
+# Logs and OS files
+*.log
+.DS_Store
+
+# Local tooling and old starter template, not part of the site
+.claude/
+vite-project/
