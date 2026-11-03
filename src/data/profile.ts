@@ -21,6 +21,5 @@ export const profile: Profile = {
     github: 'https://github.com/Sol-Reactor',
     linkedin: 'https://www.linkedin.com/in/solomon-shmels',
   },
-  // Put your Europass PDF in /public (e.g. public/cv.pdf), then set resumeUrl: '/cv.pdf' to show the Download CV button.
-  resumeUrl: '',
+  resumeUrl: '/cv.pdf',
 };
