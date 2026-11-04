@@ -9,21 +9,22 @@ export const projects: Project[] = [
   {
     slug: 'haya-school-management',
     category: 'School management system',
-    image: { src: '/projects/haya.webp', alt: 'Haya School landing page with a welcome headline, Enroll Now and Contact Us buttons, and a classroom photo', width: 1200, height: 510 },
+    image: { src: '/projects/haya.webp', alt: "Haya administrator dashboard with student, class, attendance and average-grade cards, an 8-week school attendance chart and a recent activity feed", width: 1200, height: 750 },
     name: 'Haya — School Management System',
     summary:
-      'A full-stack school management system with separate dashboards for administrators, teachers, students and parents.',
+      'A full-stack school management app for administrators, teachers, students and parents, covering attendance, exams and gradebooks, timetables and AI-written progress summaries.',
     problem:
-      'Schools juggle students, teachers, classes, attendance and announcements across paper and spreadsheets. Each role needs to see different information, and only that information.',
+      'Schools juggle attendance registers, grades and timetables across paper and spreadsheets, so students who are falling behind are often noticed only when the report card arrives. Each role also needs to see different information, and only that information.',
     contribution:
-      'Built the whole system: the Express and Prisma REST API, the database schema, JWT authentication with role-based access, and the React and Redux frontend.',
+      'Built the whole system: the Express 5 and Prisma API on PostgreSQL, cookie-based authentication with central access rules, the React dashboards for all four roles, the Claude-powered Haya Insights features, and the tests and CI pipeline.',
     decisions: [
-      'Four roles (Admin, Teacher, Student, Parent) with role-based access control enforced on the API, not just hidden in the UI.',
-      'JWT authentication with bcrypt-hashed passwords, plus Helmet for secure HTTP headers.',
-      'Prisma as the data layer so the schema, migrations and queries stay typed and in one place.',
-      'Redux Toolkit for shared state, and five switchable themes for a customizable interface.',
+      'Haya Insights: plain SQL rules flag students whose attendance or marks are dropping, and Claude only explains the numbers in plain language, so the AI never decides who is flagged. Progress summaries stream token by token and teachers can copy them as report-card drafts.',
+      'The AI only receives a minimal snapshot (first name, class level, attendance and grades, no emails or ids), follows the same access rules as the data, is cached until grades or attendance change, and is rate-limited per user.',
+      'Sessions live in an httpOnly, SameSite cookie with an Origin check against CSRF, and every list and record is scoped centrally to what the caller may see, not just checked by role.',
+      'A read-only, one-click demo for every role, light and dark themes, keyboard and reduced-motion support, and layouts tested from 375 px phones to desktops.',
+      'Integration tests with Vitest and Supertest against a real Postgres, Playwright and axe accessibility checks, and GitHub Actions CI.',
     ],
-    stack: ['React', 'Redux Toolkit', 'Tailwind CSS', 'Vite', 'Node.js', 'Express', 'Prisma'],
+    stack: ['React', 'Redux Toolkit', 'Tailwind CSS', 'Recharts', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'Claude API'],
     links: {
       repo: 'https://github.com/Sol-Reactor/school-management',
       live: 'https://manageschool-fawn.vercel.app',
