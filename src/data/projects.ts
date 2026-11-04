@@ -56,14 +56,15 @@ export const projects: Project[] = [
     slug: 'myquiz',
     category: 'Learning platform',
     image: { src: '/projects/myquiz.webp', alt: "AuraQuiz home page in a dark theme, with a 'Level up your coding brain' headline, quiz and topic counts, and a sample data-structures question answered correctly", width: 1200, height: 600 },
-    name: 'MyQuiz — Quiz Platform',
+    name: 'AuraQuiz — Quiz Platform',
     summary:
-      'A full-stack quiz app that helps students learn by testing themselves, with score tracking and an admin dashboard for creating quizzes.',
+      'A full-stack quiz app for practising software topics, with timed challenges, a local multiplayer mode, score tracking and an admin dashboard for creating quizzes.',
     problem:
       'Students learn better by answering questions than by re-reading notes, but need somewhere to take quizzes and see how they are improving over time.',
     contribution:
-      'Built the Express REST API on PostgreSQL, JWT authentication with user and admin roles, and the React frontend with user and admin dashboards.',
+      'Built the Express REST API on PostgreSQL, JWT authentication with user and admin roles, and the React frontend with user and admin dashboards, then redesigned the UI with a light and dark theme and better mobile layouts.',
     decisions: [
+      'Three ways to play: solo practice, timed challenges where answers submit automatically when the clock runs out, and a 2–4 player pass-the-device mode where each player gets their own questions and a live scoreboard.',
       'Role-based access: users take quizzes and review their results, while admins create and manage quizzes.',
       'Plain SQL through the pg driver on PostgreSQL, with seed scripts to set up quizzes and an admin account.',
       'A RESTful API with protected routes for submitting answers and reading results.',
