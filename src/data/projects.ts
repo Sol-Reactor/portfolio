@@ -55,7 +55,7 @@ export const projects: Project[] = [
   {
     slug: 'myquiz',
     category: 'Learning platform',
-    image: { src: '/projects/myquiz.webp', alt: "The quiz app's home page, branded AuraQuest, with a coding-quiz headline, practice buttons and statistics cards", width: 1200, height: 593 },
+    image: { src: '/projects/myquiz.webp', alt: "AuraQuiz home page in a dark theme, with a 'Level up your coding brain' headline, quiz and topic counts, and a sample data-structures question answered correctly", width: 1200, height: 600 },
     name: 'MyQuiz — Quiz Platform',
     summary:
       'A full-stack quiz app that helps students learn by testing themselves, with score tracking and an admin dashboard for creating quizzes.',
