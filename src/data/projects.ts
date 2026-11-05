@@ -33,21 +33,22 @@ export const projects: Project[] = [
   {
     slug: 'familia',
     category: 'Social network',
-    image: { src: '/projects/familia.webp', alt: 'Familia login screen with email and password fields and a sign-up link', width: 1096, height: 892 },
+    image: { src: '/projects/familia.webp', alt: 'Familia profile page with a cover photo, avatar, bio and website link, a sidebar for feed, friends, messages, notifications and settings, and a post composer', width: 1200, height: 750 },
     name: 'Familia — Social Network',
     summary:
-      'A Facebook-style social network with real-time updates and image uploads, built to practise a modern stack on both the frontend and the backend.',
+      'A full-stack social network with posts and image uploads, friends, real-time chat with typing indicators and read receipts, and live notifications.',
     problem:
-      'A social app has to handle accounts, posts with images and live activity between users, which makes it a demanding end-to-end practice project.',
+      'A social app has to handle accounts, posts with images, friendships and live activity between users, and every one of those is a place where one user could read or spoof another user’s data.',
     contribution:
-      'Built the frontend and the backend: the Express API with Prisma, real-time events with Socket.IO, image uploads to Cloudinary, and the React client.',
+      'Built the frontend and the backend: the Express API with Prisma on PostgreSQL, real-time chat and notifications with Socket.IO, image uploads to Cloudinary and the React client, then hardened its security and redesigned the UI.',
     decisions: [
-      'Socket.IO on both server and client so new activity reaches users without refreshing.',
-      'Images are uploaded through Multer straight to Cloudinary instead of being stored on the API server.',
-      'Request bodies are validated with Joi, and passwords hashed with bcrypt behind JWT authentication.',
-      'TanStack Query handles server data and caching, while Zustand keeps the small amount of client state.',
+      'Socket.IO uses the same authentication as the REST API, and clients may only send typing events (to friends). Messages and notifications are emitted by the server only after they are saved, so they cannot be spoofed.',
+      'JWTs are pinned to HS256 and carry a password fingerprint, so changing a password signs out every other session. Login returns one generic error with constant-time checks, so accounts cannot be enumerated.',
+      'Rate limits on login, sign-up, messages and the whole API, Joi validation on every request, and only http(s) website links and Cloudinary image URLs are accepted.',
+      'A redesigned interface with a design system, dark mode, skeleton loaders and empty states, a bottom tab bar and single-pane chat on phones, and keyboard and reduced-motion support.',
+      'TanStack Query handles server data with optimistic updates, while Zustand keeps the small amount of client state.',
     ],
-    stack: ['React', 'TanStack Query', 'Zustand', 'Tailwind CSS', 'Node.js', 'Express', 'Prisma', 'Socket.IO', 'Cloudinary'],
+    stack: ['React', 'TanStack Query', 'Zustand', 'Tailwind CSS', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'Socket.IO', 'Cloudinary'],
     links: {
       repo: 'https://github.com/Sol-Reactor/familia',
       live: 'https://familia-sable.vercel.app',
