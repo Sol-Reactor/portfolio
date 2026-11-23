@@ -7,6 +7,26 @@ import type { Project } from '../types';
  */
 export const projects: Project[] = [
   {
+    slug: 'prqms',
+    category: 'Client project · In use',
+    name: 'PRQMS — Phone Repair Queue & Stock System',
+    summary:
+      'A repair queue and stock system I built for a real phone repair shop: customers book appointments, get an email when their phone is ready, and can check its status on the web or a Telegram bot.',
+    problem:
+      'Many customers brought their phones to the same small repair shop, and requests were tracked by hand, so keeping the order of who came first, telling customers when their phone was ready and keeping track of stock all depended on the owner, and customers had to come in or call to ask.',
+    contribution:
+      'Spotted the problem by observing the shop, proposed the system to the owner, and built it alone, end to end: the PostgreSQL schema with Prisma, a typed Express.js API and the React and TypeScript interface. Delivered it to the client, who uses it in the business today.',
+    decisions: [
+      'Customers book an appointment and the queue is ordered by appointment time, so they are served fairly and the owner always knows who is next.',
+      'When a repair is finished the system emails the customer, and customers can also check their repair status on the web or through a Telegram bot, so they no longer need to call or visit to ask.',
+      'Stock management lives in the same system as the repairs, so the owner runs the queue and the stock from one place.',
+      'Typed end to end: a Prisma schema, a typed Express API and a TypeScript React client, so data shapes stay consistent across the stack.',
+      "Features were shaped around the owner's day-to-day routine rather than a generic template.",
+    ],
+    stack: ['React', 'Vite', 'TypeScript', 'Tailwind CSS', 'Express.js', 'Prisma', 'PostgreSQL', 'Telegram Bot API'],
+    links: {},
+  },
+  {
     slug: 'haya-school-management',
     category: 'School management system',
     image: { src: '/projects/haya.webp', alt: "Haya administrator dashboard with student, class, attendance and average-grade cards, an 8-week school attendance chart and a recent activity feed", width: 1200, height: 750 },

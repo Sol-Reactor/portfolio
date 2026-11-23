@@ -1,5 +1,5 @@
 import { ArrowUpRight, CheckCircle2, Eye, X } from 'lucide-react';
-import { useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
 import type { Project } from '../../types';
 import { TagList } from '../ui/Tag';
 import { GitHubIcon } from '../ui/SocialLinks';
@@ -35,6 +35,12 @@ function ProjectDetails({ project, dialogRef }: { project: Project; dialogRef: R
   return (
     <dialog
       ref={dialogRef}
+      onClose={() => {
+        // Drop the case-study hash so the address bar matches what is on screen.
+        if (window.location.hash === caseStudyHash(project.slug)) {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+      }}
       aria-labelledby={`${project.slug}-title`}
       onClick={(e) => e.target === e.currentTarget && close()}
       className="m-auto max-h-[90svh] w-[min(42rem,calc(100%-2rem))] overflow-y-auto rounded-2xl border border-line bg-bg p-0 text-ink shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm"
@@ -116,6 +122,9 @@ function ProjectDetails({ project, dialogRef }: { project: Project; dialogRef: R
   );
 }
 
+/** Each case study has its own address, e.g. /#project-haya-school-management, so it can be shared. */
+const caseStudyHash = (slug: string) => `#project-${slug}`;
+
 /** Round icon action shown on the image overlay. */
 function OverlayAction({
   label,
@@ -142,14 +151,31 @@ function OverlayAction({
 }
 
 /**
- * Card: framed image, overlapping category tag, centred name and one-line summary.
- * Hover (or keyboard focus) lifts the card and reveals round actions over the image;
- * on touch screens the first tap on the image reveals them.
+ * Card: framed image, overlapping category tag, centred name, a short summary and
+ * always-visible actions. Hover (or keyboard focus) also reveals round actions over the image.
  */
 export function ProjectCard({ project }: { project: Project }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [touched, setTouched] = useState(false);
   const { live, repo } = project.links;
+
+  const openDetails = () => {
+    const dialog = dialogRef.current;
+    if (!dialog || dialog.open) return;
+    dialog.showModal();
+    history.replaceState(null, '', caseStudyHash(project.slug));
+  };
+
+  // Open this case study when the page is visited (or navigated) with its address.
+  useEffect(() => {
+    const sync = () => {
+      if (window.location.hash === caseStudyHash(project.slug)) openDetails();
+    };
+    sync();
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [project.slug]);
 
   return (
     <article className="group relative flex h-full flex-col rounded-2xl border-2 border-transparent bg-surface p-3 shadow-[0_4px_10px_-2px_rgb(0_0_0/0.18)] transition-[transform,border-color,box-shadow] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] focus-within:border-accent-soft/60 hover:-translate-y-2 hover:border-accent-soft/60 hover:shadow-[0_22px_30px_-10px_rgb(0_0_0/0.35),0_0_24px_rgb(99_102_241/0.2)]">
@@ -166,7 +192,7 @@ export function ProjectCard({ project }: { project: Project }) {
             label={`Details about ${project.name}`}
             title="Details"
             revealed={touched}
-            onClick={() => dialogRef.current?.showModal()}
+            onClick={openDetails}
           >
             <Eye aria-hidden="true" className="size-5" />
           </OverlayAction>
@@ -187,8 +213,44 @@ export function ProjectCard({ project }: { project: Project }) {
         <p className="absolute -top-4 left-1/2 w-3/5 -translate-x-1/2 truncate rounded-md border border-line bg-surface-2 px-3 py-1.5 font-sans text-[11px] tracking-wider text-muted uppercase">
           {project.category}
         </p>
-        <h3 className="truncate text-lg font-bold text-accent-soft">{project.name}</h3>
-        <p className="mt-1 truncate text-sm text-muted">{project.summary}</p>
+        <h3 className="text-lg leading-snug font-bold text-balance text-accent-soft">{project.name}</h3>
+        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{project.summary}</p>
+      </div>
+
+      {/* Always-visible actions, so nobody has to discover the hover overlay to reach the case study. */}
+      <div className="mt-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 px-2 pt-3 pb-2">
+        <button
+          type="button"
+          onClick={openDetails}
+          className="inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-lg bg-accent px-4 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+        >
+          Read case study
+          <span className="sr-only">: {project.name}</span>
+        </button>
+        {live && (
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 items-center gap-1 text-sm font-medium text-accent-soft underline-offset-4 hover:underline"
+          >
+            Live demo
+            <ArrowUpRight aria-hidden="true" className="size-4" />
+            <span className="sr-only">of {project.name} (opens in a new tab)</span>
+          </a>
+        )}
+        {repo && (
+          <a
+            href={repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 items-center gap-1.5 text-sm font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
+          >
+            <GitHubIcon className="size-4" />
+            Code
+            <span className="sr-only">for {project.name} (opens in a new tab)</span>
+          </a>
+        )}
       </div>
 
       <ProjectDetails project={project} dialogRef={dialogRef} />

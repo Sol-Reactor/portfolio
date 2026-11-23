@@ -12,14 +12,14 @@ import { Skills } from './components/sections/Skills';
 import { showExperience } from './data/navigation';
 
 /**
- * Section order: who I am, then proof (projects), then capabilities and history, then contact.
+ * Section order: who I am, then proof (projects, then work history), then capabilities, then contact.
  * Numbering is derived, so hiding a section never leaves a gap. Keep data/navigation.ts in the same order.
  */
 const sections = [
   { id: 'about', Component: About },
   { id: 'projects', Component: Projects },
-  { id: 'skills', Component: Skills },
   ...(showExperience ? [{ id: 'experience', Component: Experience }] : []),
+  { id: 'skills', Component: Skills },
   { id: 'approach', Component: Approach },
   { id: 'contact', Component: Contact },
 ];

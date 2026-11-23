@@ -43,7 +43,7 @@ export function Projects({ index }: { index: string }) {
       index={index}
       eyebrow="Projects"
       title="Featured *work*"
-      description="Real projects I designed and built end to end. Hover over a project, or tap it on a phone, to open the live site, the code or the full case study."
+      description="Real projects I designed and built end to end, starting with a system a real business uses. Open any case study for the problem, my role and the key engineering decisions."
     >
       {filters.length > 1 && (
         <div role="group" aria-label="Filter projects by technology" className="mb-12 flex flex-wrap gap-2">

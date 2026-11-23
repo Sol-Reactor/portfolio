@@ -1,5 +1,6 @@
 import { m } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { experience } from '../../../data/experience';
 import { profile } from '../../../data/profile';
 import { skillCategories } from '../../../data/skills';
 import { ButtonLink } from '../../ui/ButtonLink';
@@ -19,6 +20,8 @@ const rise = {
 const allSkills = skillCategories.flatMap((c) => c.skills);
 const pick = (names: string[]) => names.map((n) => allSkills.find((s) => s.name === n)).filter((s) => s !== undefined);
 const heroStack = pick(profile.heroStack);
+// The current role (if any) is shown above the name, so recruiters see it first.
+const currentRole = experience.find((e) => e.current);
 const orbit = pick(profile.heroOrbit).slice(0, 4);
 
 // Round badges beside the photo: varied sizes and offsets so the column feels composed, not gridded.
@@ -49,6 +52,21 @@ export function Hero() {
       <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)_auto] lg:gap-10 xl:gap-14">
         {/* Who I am, what I build, where to go next. */}
         <m.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }} className="min-w-0">
+          {currentRole && (
+            <m.p variants={rise} className="mb-5">
+              <a
+                href="#experience"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm text-muted transition-colors duration-200 hover:border-accent-soft/60 hover:text-ink"
+              >
+                <span aria-hidden="true" className="relative flex size-2">
+                  <span className="absolute inset-0 rounded-full bg-emerald-500/60 motion-safe:animate-ping" />
+                  <span className="relative size-2 rounded-full bg-emerald-500" />
+                </span>
+                Currently <span className="font-semibold text-ink">{currentRole.role}</span> at{' '}
+                <span className="font-semibold text-ink">{currentRole.organization}</span>
+              </a>
+            </m.p>
+          )}
           <m.p variants={rise} className="text-sm font-medium tracking-[0.14em] text-accent-soft uppercase">
             Hello, I'm
           </m.p>
