@@ -9,7 +9,7 @@ export const profile: Profile = {
   name: 'Solomon',
   brand: 'SOL',
   title: 'Full-Stack Developer',
-  roles: ['Frontend Developer', 'Backend Developer', 'Full-Stack Engineer', 'UI Designer', 'Problem Solver', 'Lifelong Learner'],
+  roles: ['Full-Stack Developer', 'Frontend Developer', 'Backend Developer'],
   heroStack: ['React', 'TypeScript', 'Node.js', 'Spring Boot', 'PostgreSQL'],
   heroOrbit: ['Docker', 'Tailwind CSS', 'Next.js', 'Prisma'],
   intro:

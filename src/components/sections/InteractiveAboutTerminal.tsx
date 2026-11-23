@@ -217,13 +217,8 @@ export function InteractiveAboutTerminal() {
         )}
       </AnimatePresence>
 
-      {/* Navigation: appears once the session completes; hidden (not just transparent) before, so it can't be tabbed to. */}
-      <m.div
-        initial={false}
-        animate={done ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-        transition={{ duration: 0.4, ease }}
-        className={`mt-6 flex flex-wrap gap-3 ${done ? '' : 'invisible'}`}
-      >
+      {/* Navigation: always available, so skimmers never wait for the animation. */}
+      <div className="mt-6 flex flex-wrap gap-3">
         <ButtonLink href="#projects">
           Explore My Projects
           <ArrowRight aria-hidden="true" className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
@@ -231,7 +226,7 @@ export function InteractiveAboutTerminal() {
         <ButtonLink href="#contact" variant="secondary">
           Contact Me
         </ButtonLink>
-      </m.div>
+      </div>
     </div>
   );
 }
