@@ -7,6 +7,7 @@ import { GitHubIcon } from '../ui/SocialLinks';
 function ProjectVisual({ project }: { project: Project }) {
   const zoom = 'transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-[1.07]';
   if (project.image) {
+    const position = project.image.position === 'left' ? 'object-left' : 'object-top';
     return (
       <img
         src={project.image.src}
@@ -15,7 +16,7 @@ function ProjectVisual({ project }: { project: Project }) {
         height={project.image.height}
         loading="lazy"
         decoding="async"
-        className={`h-full w-full object-cover object-top ${zoom}`}
+        className={`h-full w-full object-cover ${position} ${zoom}`}
       />
     );
   }
@@ -84,6 +85,27 @@ function ProjectDetails({ project, dialogRef }: { project: Project; dialogRef: R
             </li>
           ))}
         </ul>
+
+        {project.caseStudyImages && (
+          <div className="mt-6">
+            <h4 className="font-sans text-xs tracking-widest text-accent-soft uppercase">Screenshots</h4>
+            <ul className="mt-3 space-y-3">
+              {project.caseStudyImages.map((image) => (
+                <li key={image.src}>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="mx-auto h-auto max-h-96 w-auto max-w-full rounded-lg border border-line object-contain"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div className="mt-6">
           <TagList items={project.stack} label="Technologies used" />

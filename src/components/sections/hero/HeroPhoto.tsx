@@ -17,7 +17,7 @@ export function HeroPhoto() {
           <img
             src={profile.photo}
             alt={`Portrait of ${profile.name}`}
-            className="h-full w-full [mask-image:radial-gradient(ellipse_closest-side,black_60%,transparent_100%)] object-cover object-[center_15%]"
+            className="h-full w-full [mask-image:radial-gradient(ellipse_closest-side,black_60%,transparent_100%)] object-cover object-[center_15%] dark:[mask-image:radial-gradient(ellipse_closest-side_at_46%_48%,black_34%,rgb(0_0_0/0.50)_66%,transparent_100%)]"
             onError={() => setFailed(true)}
           />
         )}

@@ -48,7 +48,8 @@ export interface Project {
     repo?: string;
     live?: string;
   };
-  image?: ProjectImage;
+  image?: ProjectImage & { position?: 'left' };
+  caseStudyImages?: ProjectImage[];
 }
 
 export type EmploymentType = 'Internship' | 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Independent';

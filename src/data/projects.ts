@@ -1,5 +1,13 @@
 import type { Project } from '../types';
 
+const prqmsHome = {
+  src: '/projects/prqms-home.png',
+  alt: 'Phone repair shop homepage with appointment booking and a repair tracking link',
+  width: 1876,
+  height: 823,
+  position: 'left',
+} as const;
+
 /**
  * Featured projects, shown in this order. Only list real work — add
  * `links.repo` / `links.live` when they exist, and an `image` (put the file
@@ -9,6 +17,16 @@ export const projects: Project[] = [
   {
     slug: 'prqms',
     category: 'Client project · In use',
+    image: prqmsHome,
+    caseStudyImages: [
+      prqmsHome,
+      {
+        src: '/projects/prqms-staff-login.png',
+        alt: 'PRQMS staff sign-in screen with empty email and password fields',
+        width: 772,
+        height: 792,
+      },
+    ],
     name: 'PRQMS — Phone Repair Queue & Stock System',
     summary:
       'A repair queue and stock system I built for a real phone repair shop: customers book appointments, get an email when their phone is ready, and can check its status on the web or a Telegram bot.',
